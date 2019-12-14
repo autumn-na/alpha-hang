@@ -1,7 +1,7 @@
 import random
 
-class Word:
 
+class Word:
     def __init__(self, filename):
         self.words = []
         f = open(filename, 'r')
@@ -14,7 +14,7 @@ class Word:
             self.words.append(word)
             self.count += 1
 
-        #print('%d words in DB' % self.count)
+        # print('%d words in DB' % self.count)
 
     def test(self):
         return 'default'
@@ -26,4 +26,3 @@ class Word:
             r = random.randrange(self.count)
 
         return self.words[r]
-
