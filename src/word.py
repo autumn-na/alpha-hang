@@ -19,10 +19,10 @@ class Word:
     def test(self):
         return 'default'
 
-    def randFromDB(self):
+    def randFromDB(self, _len):
         r = random.randrange(self.count)
 
-        while len(self.words[r]) != 6:
+        while len(self.words[r]) not in _len:
             r = random.randrange(self.count)
 
         return self.words[r]
