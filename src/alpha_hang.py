@@ -5,9 +5,11 @@ import math
 ALPHABET_NUM = 26
 MAX_LEN = 12
 
+#G3200, perpetrate
 
 class AlphaHang():
     def __init__(self, _word_len):
+        """
         self.layers = [
             Layer(MAX_LEN + 1, 'Input'),
             Layer(MAX_LEN + 2, 'Hidden_0'),
@@ -27,6 +29,41 @@ class AlphaHang():
             Layer((MAX_LEN + 2) // 4, 'Hidden_6'),
             Layer((MAX_LEN + 2) // 4, 'Hidden_6'),
             Layer(1, 'Output')
+        ]"""
+        # brain 2
+        self.layers = [
+            Layer(MAX_LEN + 1, 'Input'),
+            Layer(MAX_LEN + 2, 'Hidden_0'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(MAX_LEN + 2, 'Hidden_1'),
+            Layer(1, 'Output')
         ]
 
     def perceive(self, _cur_word, _fail_alphabets):
@@ -40,15 +77,16 @@ class AlphaHang():
     def evaluate(self):
         for i in range(1, len(self.layers)):
             for j in range(self.layers[i].x.shape[0]):
-                self.layers[i].x[j] = np.sum(self.layers[i].x * self.layers[i].w + self.layers[i].b, axis=0)
+                self.layers[i].x[j] = np.sum(self.layers[i - 1].x * self.layers[i - 1].w + self.layers[i - 1].b, axis=0)
 
-            self.layers[i].x = self.sigmoid(self.layers[i].x)
-
+            self.sigmoid(self.layers[i].x)
         # self.printLayers()
         # self.guess()
 
     def interpretOutput(self):
         percent = np.zeros(ALPHABET_NUM, dtype=float)
+        self.getLayerByName('Output').x += abs(self.getLayerByName('Output').x.min())
+
         sum = self.getLayerByName('Output').x.sum()
 
         for i in range(ALPHABET_NUM):
