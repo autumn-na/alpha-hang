@@ -9,7 +9,6 @@ MAX_LEN = 12
 
 class AlphaHang():
     def __init__(self, _word_len):
-        """
         self.layers = [
             Layer(MAX_LEN + 1, 'Input'),
             Layer(MAX_LEN + 2, 'Hidden_0'),
@@ -28,41 +27,6 @@ class AlphaHang():
             Layer((MAX_LEN + 2) // 4, 'Hidden_6'),
             Layer((MAX_LEN + 2) // 4, 'Hidden_6'),
             Layer((MAX_LEN + 2) // 4, 'Hidden_6'),
-            Layer(1, 'Output')
-        ]"""
-        # brain 2
-        self.layers = [
-            Layer(MAX_LEN + 1, 'Input'),
-            Layer(MAX_LEN + 2, 'Hidden_0'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
-            Layer(MAX_LEN + 2, 'Hidden_1'),
             Layer(1, 'Output')
         ]
 
@@ -80,8 +44,6 @@ class AlphaHang():
                 self.layers[i].x[j] = np.sum(self.layers[i - 1].x * self.layers[i - 1].w + self.layers[i - 1].b, axis=0)
 
             self.sigmoid(self.layers[i].x)
-        # self.printLayers()
-        # self.guess()
 
     def interpretOutput(self):
         percent = np.zeros(ALPHABET_NUM, dtype=float)
@@ -123,10 +85,10 @@ class AlphaHang():
         for i in self.layers:
             i.randWeightBias()
 
-    def readGene(self):
+    def readGene(self, path='genes/gene_master_'):
         for i in range(len(self.layers)):
-            self.layers[i].w = np.loadtxt('genes/gene_master_' + str(i) + 'w.txt')
-            self.layers[i].b = np.loadtxt('genes/gene_master_' + str(i) + 'b.txt')
+            self.layers[i].w = np.loadtxt(path + str(i) + 'w.txt')
+            self.layers[i].b = np.loadtxt(path + str(i) + 'b.txt')
 
     def writeGene(self):
         for i in range(len(self.layers)):
