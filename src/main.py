@@ -144,7 +144,7 @@ for i in range(mng.goal + 1):
     mng.makeGeneration()
     mng.runGeneration()
     if mng.generation % mng.check == 0:
-        print('G' + str(mng.generation) + ' Best: ' + str(mng.fitness.max()) +
+        print('Generation: ' + str(mng.generation) + ' Best: ' + str(mng.fitness.max()) +
               ' Word: ' + mng.words_gene[mng.getParentsIndex()[0]] + ' Failed: ' + ''.join(mng.fail_gene[mng.getParentsIndex()[0]]))
 
         if mng.fitness.max() > max_fitness:
