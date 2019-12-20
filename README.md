@@ -1,2 +1,2 @@
 # alpha-hang
- Kookmin Univ. AD Project
+ Kookmin Univ. AD Project (Class 2)
